@@ -61,11 +61,12 @@ project/
 │   └── image_analysis.py
 ├── text_summerization/
 │   └── summerizaton.py
-│
+│├── static/
+│   └── main_page.js
 ├── templates/
 │   └── index.html
 │
-├── app.py
+├── server.py
 ├── requirements.txt
 └── README.md
 ```
@@ -77,7 +78,7 @@ project/
 Launch the Flask server:
 
 ```bash
-python app.py
+python3 server.py
 ```
 
 By default, the server runs on:
@@ -92,75 +93,7 @@ Open in your browser:
 http://localhost:9000
 ```
 
-This loads the UI for all three modules:
 
-* **Image Explainer**
-* **Sentiment Analyzer**
-* **Dialogue Summarizer**
-
----
-
-# 🌐 API Endpoints
-
----
-
-## 1️⃣ `/sentiment_analysis` — **GET**
-
-Runs sentiment analysis on the supplied text.
-
-### **Query Parameter**
-
-| Name            | Type   | Required | Description |
-| --------------- | ------ | -------- | ----------- |
-| `textToAnalyze` | string | yes      | Input text  |
-
-### Example
-
-```
-GET /sentiment_analysis?textToAnalyze=I love this!
-```
-
-#### Response
-
-```json
-{
-  "label": "POSITIVE",
-  "score": 0.97
-}
-```
-
----
-
-## 2️⃣ `/image_analysis` — **POST**
-
-Analyzes an uploaded image and returns a detailed description.
-
-### **Form-Data Fields**
-
-| Field    | Type   | Required | Description        |
-| -------- | ------ | -------- | ------------------ |
-| `image`  | file   | yes      | Image to analyze   |
-| `prompt` | string | no       | Custom instruction |
-
-### Example (cURL)
-
-```bash
-curl -X POST http://localhost:9000/image_analysis \
-  -F "image=@example.jpg" \
-  -F "prompt=Describe this image."
-```
-
-#### Response
-
-```json
-{
-  "answer": "The image shows three hikers walking..."
-}
-```
-
----
-
-## 
 
 ## 🛠 Notes
 
