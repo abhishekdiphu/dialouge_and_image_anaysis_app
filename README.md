@@ -1,7 +1,4 @@
 
-
----
-
 # 📘 Multimodal AI Web Application (Flask)
 
 This project is a **Flask-based multimodal AI system** capable of performing:
