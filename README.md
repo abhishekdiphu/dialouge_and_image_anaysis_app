@@ -1,4 +1,4 @@
-Below is your **README.md written fully in proper Markdown syntax**, ready to save as a file named **`README.md`**.
+
 
 ---
 
