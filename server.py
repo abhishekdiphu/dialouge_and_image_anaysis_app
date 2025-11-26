@@ -1,15 +1,11 @@
 
-# Import Flask, render_template, request from the flask pramework package : TODO
-# Import the sentiment_analyzer function from the package created: TODO
 from flask import Flask, render_template, request, jsonify
 from sentiment_analysis.sentiment_analysis import analyze_text
 from image_captioning.image_analysis import analyze_image
 from text_summerization.summerizaton import summerize_text
-
 from PIL import Image
 import io, base64, torch
 from transformers import AutoProcessor, AutoModelForVision2Seq
-
 from itertools import zip_longest
 
 
@@ -49,12 +45,7 @@ def sent_analyzer():
 @app.route("/image_analysis", methods=["POST"])
 def sent_to_image_analyzer():
     
-    """
-    Expects multipart/form-data with:
-      - image: file
-      - prompt: text (e.g. "Explain this image in detail.")
-    Returns JSON: { "answer": "..." }
-    """
+
     MODEL_ID = "Qwen/Qwen2-VL-2B-Instruct"
 
 
@@ -75,6 +66,7 @@ def sent_to_image_analyzer():
     torch_dtype=dtype,
     device_map="auto" if device == "cuda" else None
     )
+
 
     # ✅ Move model to the right device
     model.to(device)

@@ -17,3 +17,4 @@ wheel==0.45.1
 Flask==3.1.2
 pandas
 tqdm
+numpy
