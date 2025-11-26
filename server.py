@@ -49,7 +49,7 @@ def sent_to_image_analyzer():
     MODEL_ID = "Qwen/Qwen2-VL-2B-Instruct"
 
 
-    device = "mps"      # Apple Silicon GPU
+    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")      # Apple Silicon GPU
 
     print(f"Using device: {device}")
 
