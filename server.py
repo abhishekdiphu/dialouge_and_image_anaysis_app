@@ -10,8 +10,6 @@ from PIL import Image
 import io, base64, torch
 from transformers import AutoProcessor, AutoModelForVision2Seq
 
-
-# zip longest so human/ai alternate correctly
 from itertools import zip_longest
 
 
