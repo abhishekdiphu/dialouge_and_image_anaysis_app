@@ -11,7 +11,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9001"]
       interval: 20s
-      timeout: 5s
+      timeout: 30s
       retries: 3
     networks:
       - appnet
