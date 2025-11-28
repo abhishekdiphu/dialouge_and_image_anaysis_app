@@ -135,7 +135,9 @@ def send_to_summerization():
 
 
 
-
+@app.route("/")
+def health():
+    return {"status": "the backend is healthy!"}
 
 if __name__ == "__main__":
 
