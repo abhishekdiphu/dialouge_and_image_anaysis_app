@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abhishek-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: multimodal-app
+  template:
+    metadata:
+      labels:
+        app: multimodal-app
+    spec:
+      containers:
+      - name: multimodal-app
+        image: multimodal-app:latest
+        ports:
+        - containerPort: 9000
