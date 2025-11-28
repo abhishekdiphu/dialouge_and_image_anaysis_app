@@ -1,0 +1,48 @@
+# -------------------------------------------------------
+# 1. Base Image
+# -------------------------------------------------------
+# Using the official lightweight Python image (Debian slim)
+FROM python:3.13
+
+# -------------------------------------------------------
+# 2. Set Working Directory
+# -------------------------------------------------------
+# All application files will live in /app inside the container
+WORKDIR /backend_app
+
+# -------------------------------------------------------
+# 3. Install System-Level Dependencies
+# -------------------------------------------------------
+# For image processing, transformers, and Torch
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    libglib2.0-0 \
+    libgl1 \
+    libjpeg62-turbo \
+    libpng16-16 \
+    && rm -rf /var/lib/apt/lists/*
+
+# -------------------------------------------------------
+# 4. Copy Project Files
+# -------------------------------------------------------
+# Copy everything into the container
+COPY . /backend_app
+
+# -------------------------------------------------------
+# 5. Install Python Dependencies
+# -------------------------------------------------------
+# Installs based on the project's requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# -------------------------------------------------------
+# 6. Expose Flask Port
+# -------------------------------------------------------
+# Flask runs on port 9000 in your app
+EXPOSE 9001
+
+# -------------------------------------------------------
+# 7. Run the Flask Application
+# -------------------------------------------------------
+# You run app.py, so we start it directly
+CMD ["python3", "backend_server.py"]
