@@ -1,10 +1,6 @@
-src/dataset_rlhf/
+backend/src/dataset_rlhf/
 __pycache__/
 *.pyc
-.env
-venv/
-.ipynb_checkpoints
-.DS_Store
-logs/
-src/saved_models/ref_model/
-src/saved_models/toxicity-reward-model/
+backend/src/saved_models/ref_model/
+backend/src/saved_models/toxicity-reward-model/
+backend/src/saved_models
