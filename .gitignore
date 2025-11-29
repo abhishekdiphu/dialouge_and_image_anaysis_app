@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 backend/src/saved_models/ref_model/
 backend/src/saved_models/toxicity-reward-model/
+.DS_Store

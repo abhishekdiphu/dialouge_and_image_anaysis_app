@@ -153,7 +153,7 @@ async function initImageAnalyzer() {
 
         try {
             // ✅ Call Flask backend
-            const res = await fetch("http://localhost:9001/image_analysis", {
+            const res = await fetch("http://" + window.location.hostname + ":30091/image_analysis", {
                 method: "POST",
                 body: form
             });
@@ -201,7 +201,7 @@ async function initImageAnalyzer() {
 
     try {
       // Send request to backend (adjust URL if needed)
-      const response = await fetch("http://localhost:9001/dialog_summerization", {
+      const response = await fetch("http://" + window.location.hostname + ":30091/dialog_summerization", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ dialogue: inputText })   // 'document' key expected by backend
