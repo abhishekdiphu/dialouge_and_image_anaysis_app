@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: backend:latest   # <-- If building locally, push to a registry or use Minikube's docker-env
+          image: backend:latest   # 
           imagePullPolicy: Never
           ports:
             - containerPort: 9001
@@ -33,21 +33,7 @@ spec:
               port: 9001
             initialDelaySeconds: 5
             periodSeconds: 10
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-  labels:
-    app: backend
-spec:
-  type: ClusterIP
-  selector:
-    app: backend
-  ports:
-    - name: http
-      port: 9001
-      targetPort: 9001
+
 
 ---
 apiVersion: v1
@@ -55,13 +41,14 @@ kind: Service
 metadata:
   name: backend-nodeport
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: backend
   ports:
-    - port: 9001
+    - name: http
+      port: 30091 #9001
       targetPort: 9001
-      nodePort: 30091    # free port > 30000
+      #nodePort: 30091    # free port > 30000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -88,32 +75,24 @@ spec:
           # frontend waits for backend via readiness probe automatically
           env:
             - name: BACKEND_URL
-              value: "http://backend-service:9001"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-  labels:
-    app: frontend
-spec:
-  type: ClusterIP
-  selector:
-    app: frontend
-  ports:
-    - name: http
-      port: 9000
-      targetPort: 9000
+              value: "http://localhost:30091"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-nodeport
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: frontend
   ports:
-    - port: 9000
+    - name: http
+      port: 30090 #9000
       targetPort: 9000
-      nodePort: 30090   # accessible externally at: <node-ip>:30090
+      #nodePort: 30090   # accessible externally at: <node-ip>:30090
+
+
+
+# kubectl port-forward deployment/backend 30091:9001
+# kubectl port-forward deployment/frontend 30090:9000
